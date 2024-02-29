@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 import psycopg2
 from psycopg2 import pool
 
+from custom_logger import logger
+
 load_dotenv()
 
 conn_params = {
@@ -44,7 +46,7 @@ def duration(func):
         result = func(*args, **kwargs)
         end_time = time.perf_counter()
         total_time = end_time - start_time
-        print(f'Function {kwargs.get("counter").__name__} took {total_time:.4f} seconds')
+        logger.info(f'Function {kwargs.get("counter").__name__} took {total_time:.4f} seconds')
         return result
 
     return duration_wrapper
@@ -53,6 +55,7 @@ def duration(func):
 @duration
 def main(counter):
     threads = []
+    print('starting ....')
     for _ in range(10):
         thread = threading.Thread(target=counter)
         threads.append(thread)
