@@ -55,7 +55,6 @@ def duration(func):
 @duration
 def main(counter):
     threads = []
-    print('starting ....')
     for _ in range(10):
         thread = threading.Thread(target=counter)
         threads.append(thread)

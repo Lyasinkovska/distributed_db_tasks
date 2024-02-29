@@ -1,9 +1,9 @@
 import psycopg2
-from utils import connection_pool, main
+from utils import main, conn_params
 
 
 def row_level_locking_counter():
-    with connection_pool.getconn() as conn:
+    with psycopg2.connect(**conn_params) as conn:
         with conn.cursor() as cursor:
             try:
                 for _ in range(10000):

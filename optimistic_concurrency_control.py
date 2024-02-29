@@ -11,7 +11,6 @@ def optimistic_concurrency_control_counter():
                     while True:
                         cursor.execute("SELECT counter, version FROM user_counter WHERE user_id = 1")
                         counter, version = cursor.fetchone()
-                        # print(counter, version)
                         counter += 1
                         cursor.execute(
                             "UPDATE user_counter SET counter = %s, version = %s WHERE user_id = %s AND version = %s",
